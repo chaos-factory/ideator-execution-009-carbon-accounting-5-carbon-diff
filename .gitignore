@@ -1,0 +1,31 @@
+# Temporary files
+/tmp/
+*.log
+*.tmp
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+ENV/
+
+# Node (if added later)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build artifacts (if added later)
+dist/
+build/
+*.map
