@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Carbon Diff - Explain what changed between two inventories. Drop two CSVs and get a deterministic, audit-grade diff with factor/version attribution—on your device in seconds.">
+    <meta name="keywords" content="carbon accounting, GHG inventory, CSV diff, deterministic, audit-grade, emissions factor, eGRID, EPA">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chaos-factory.github.io/ideator-execution-009-carbon-accounting-5-carbon-diff/">
+    <meta property="og:title" content="Carbon Diff - Explain what changed between two inventories">
+    <meta property="og:description" content="Drop two CSVs and get a deterministic, audit-grade diff with factor/version attribution—on your device in seconds.">
+    <meta property="og:image" content="https://chaos-factory.github.io/ideator-execution-009-carbon-accounting-5-carbon-diff/assets/og-hero.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://chaos-factory.github.io/ideator-execution-009-carbon-accounting-5-carbon-diff/">
+    <meta property="twitter:title" content="Carbon Diff - Explain what changed between two inventories">
+    <meta property="twitter:description" content="Drop two CSVs and get a deterministic, audit-grade diff with factor/version attribution—on your device in seconds.">
+    <meta property="twitter:image" content="https://chaos-factory.github.io/ideator-execution-009-carbon-accounting-5-carbon-diff/assets/og-hero.png">
+    
+    <title>Carbon Diff - Explain what changed between two inventories</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- Header (Sticky) -->
+    <header id="main-header" class="site-header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="#" class="logo-link">
+                    <img src="assets/logo.svg" alt="Carbon Diff" class="logo">
+                </a>
+            </div>
+            <nav class="header-nav" aria-label="Main navigation">
+                <a href="#product">Product</a>
+                <a href="#features">Features</a>
+                <a href="#explanations">Explanations Library</a>
+                <a href="#docs">Docs</a>
+                <a href="#security">Security</a>
+                <a href="#resources">Resources</a>
+            </nav>
+            <div class="header-right">
+                <button class="btn btn-primary" id="try-browser-btn">Try in your browser</button>
+                <button class="btn btn-secondary" id="demo-btn">Watch 90‑second demo</button>
+                <select class="language-selector" aria-label="Language selector">
+                    <option value="en">EN</option>
+                    <option value="es">ES</option>
+                    <option value="fr">FR</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Explain what changed between two inventories.</h1>
+                <p class="hero-subhead">Drop two CSVs and get a deterministic, audit‑grade diff with factor/version attribution—on your device in seconds.</p>
+                
+                <ul class="value-bullets">
+                    <li>
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Client‑only. No uploads. Works offline.
+                    </li>
+                    <li>
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        10k‑row compare in under 8 seconds.
+                    </li>
+                    <li>
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Export branded PDF/CSV and paste‑ready change‑log.
+                    </li>
+                </ul>
+                
+                <div class="hero-ctas">
+                    <button class="btn btn-primary btn-large">Try it free in your browser</button>
+                    <button class="btn btn-secondary btn-large">Watch 90‑second demo</button>
+                    <button class="btn btn-tertiary btn-large">Download sample inventories</button>
+                </div>
+                
+                <div class="trust-chips">
+                    <span class="chip">GHG Protocol baseline</span>
+                    <span class="chip">eGRID/EPA Hub version aware</span>
+                    <span class="chip">Deterministic checksums</span>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="product-mock">
+                    <div class="drop-zones">
+                        <div class="drop-zone">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                            <p>Upload A (Baseline CSV)</p>
+                        </div>
+                        <div class="drop-zone">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                            <p>Upload B (Current CSV)</p>
+                        </div>
+                    </div>
+                    <p class="schema-hint">Expected: facility, scope, category, activity, factor_id, emissions_kgco2e, registry_version</p>
+                    
+                    <div class="split-panel">
+                        <div class="table-preview">
+                            <div class="heatmap-row increase">
+                                <span>Row 127</span>
+                                <span class="delta">+12,450 kgCO₂e</span>
+                            </div>
+                            <div class="heatmap-row decrease">
+                                <span>Row 89</span>
+                                <span class="delta">−8,330 kgCO₂e</span>
+                            </div>
+                            <div class="heatmap-row neutral">
+                                <span>Row 45</span>
+                                <span class="delta">+120 kgCO₂e</span>
+                            </div>
+                        </div>
+                        <div class="category-summary">
+                            <h4>Category Summary</h4>
+                            <div class="summary-bar">
+                                <span>Scope 2</span>
+                                <div class="bar" style="width: 85%"></div>
+                                <span>85%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="callout-bubble">
+                        95% of change driven by factor set update (registry v2025.12.17 → v2026.01.15).
+                    </div>
+                    
+                    <div class="badges">
+                        <span class="badge">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2v20M2 12h20"></path>
+                            </svg>
+                            Client-only compute
+                        </span>
+                        <span class="badge">
+                            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            No data leaves device
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof Strip -->
+    <section class="social-proof">
+        <div class="container">
+            <h3>Built for teams that need fast, explainable sign‑off.</h3>
+            <div class="logo-rail">
+                <img src="assets/logos/partner-1.svg" alt="Partner 1" class="partner-logo">
+                <img src="assets/logos/partner-2.svg" alt="Partner 2" class="partner-logo">
+                <img src="assets/logos/partner-3.svg" alt="Partner 3" class="partner-logo">
+                <img src="assets/logos/partner-4.svg" alt="Partner 4" class="partner-logo">
+                <img src="assets/logos/partner-5.svg" alt="Partner 5" class="partner-logo">
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works (3 Steps) -->
+    <section id="product" class="how-it-works">
+        <div class="container">
+            <h2>How it works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <h3>Upload A/B</h3>
+                    <p>Drop or select your baseline and current CSV files. Each file is fingerprinted with a deterministic checksum.</p>
+                    <div class="step-visual">
+                        <div class="file-chip">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                            </svg>
+                            <span>baseline_2023.csv</span>
+                            <span class="checksum">sha256: 7f2a...</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <h3>Choose compare options</h3>
+                    <p>Set tolerance threshold, groupings, and row match strategy. If schemas differ, open the Mapper to align columns.</p>
+                    <div class="step-visual">
+                        <div class="options-preview">
+                            <label>Tolerance: <strong>0.5%</strong></label>
+                            <label>Groupings: <strong>Scope, Category</strong></label>
+                            <label>Match: <strong>Key fields</strong></label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <h3>Compute diff and export</h3>
+                    <p>View row-level deltas, category rollups, and factor attribution. Export PDF, CSV, or copy a paste-ready change-log.</p>
+                    <div class="step-visual">
+                        <div class="diff-preview">
+                            <div class="diff-table-mini">
+                                <div class="diff-row">
+                                    <span class="row-id">#127</span>
+                                    <span class="delta-value">+12,450</span>
+                                    <span class="reason">Factor update</span>
+                                </div>
+                            </div>
+                            <div class="pdf-thumbnail">PDF Preview</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Grid (6 Tiles) -->
+    <section id="features" class="feature-grid">
+        <div class="container">
+            <h2>Features</h2>
+            <div class="grid">
+                <div class="feature-tile">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M12 1v6m0 6v6m11-11h-6m-6 0H1"></path>
+                    </svg>
+                    <h3>Row comparer</h3>
+                    <p>Match rows by checksum or key fields. Surface added, removed, and changed rows with delta magnitude and reason hints.</p>
+                </div>
+                
+                <div class="feature-tile">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <h3>Category aggregator</h3>
+                    <p>Roll up deltas by scope, category, or facility. See which groups drove the biggest change and drill into contributing rows.</p>
+                </div>
+                
+                <div class="feature-tile">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 16v-4m0-4h.01"></path>
+                    </svg>
+                    <h3>Delta reason suggester</h3>
+                    <p>When registry versions differ, Carbon Diff attributes deltas to factor updates vs. activity changes, citing the exact factor ID.</p>
+                </div>
+                
+                <div class="feature-tile">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline>
+                        <polyline points="7.5 19.79 7.5 14.6 3 12"></polyline>
+                        <polyline points="21 12 16.5 14.6 16.5 19.79"></polyline>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                    <h3>Schema &amp; mapping assistant</h3>
+                    <p>Detect schema mismatches and open an inline column mapper. Validate expected fields, units, and value ranges before computing.</p>
+                </div>
+                
+                <div class="feature-tile">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <h3>Checksums &amp; determinism</h3>
+                    <p>Every run produces a deterministic run ID. Re-run with the same inputs and options, get identical output—every time.</p>
+                </div>
+                
+                <div class="feature-tile">
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <h3>Export suite</h3>
+                    <p>Download a branded PDF report, CSV with deltas, or copy a markdown change-log for Slack/email. All exports include citations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dive 1: Deterministic row-to-row diff -->
+    <section class="deep-dive" id="row-diff">
+        <div class="container">
+            <h2>Deterministic row‑to‑row diff</h2>
+            <p class="section-intro">Carbon Diff matches rows by checksum or key fields, then computes deltas cell-by-cell. Every matched pair is labeled with its delta magnitude and a suggested reason.</p>
+            
+            <div class="table-mock">
+                <div class="table-header">
+                    <span>Row ID</span>
+                    <span>Facility</span>
+                    <span>Category</span>
+                    <span>Baseline</span>
+                    <span>Current</span>
+                    <span>Delta</span>
+                    <span>Reason</span>
+                </div>
+                <div class="table-row increase">
+                    <span class="row-chip">#127</span>
+                    <span>HQ-East</span>
+                    <span>Electricity</span>
+                    <span>45,230</span>
+                    <span>57,680</span>
+                    <span class="delta-chip">+12,450</span>
+                    <span class="reason-label">Factor update</span>
+                </div>
+                <div class="table-row decrease">
+                    <span class="row-chip">#89</span>
+                    <span>Plant-B</span>
+                    <span>Natural Gas</span>
+                    <span>32,100</span>
+                    <span>23,770</span>
+                    <span class="delta-chip">−8,330</span>
+                    <span class="reason-label">Activity change</span>
+                </div>
+                <div class="table-row neutral">
+                    <span class="row-chip">#45</span>
+                    <span>Warehouse-C</span>
+                    <span>Transport</span>
+                    <span>5,890</span>
+                    <span>6,010</span>
+                    <span class="delta-chip">+120</span>
+                    <span class="reason-label">Activity change</span>
+                </div>
+            </div>
+            
+            <div class="micro-labels">
+                <span class="label">Row checksum verified</span>
+                <span class="label">Tolerance: 0.5%</span>
+                <span class="label">Match strategy: key fields</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dive 2: Factor/version attribution -->
+    <section class="deep-dive" id="factor-attribution">
+        <div class="container">
+            <h2>Factor/version attribution</h2>
+            <p class="section-intro">If both files include registry_version, Carbon Diff attributes deltas to factor updates (from the EPA Hub or eGRID) vs. activity changes, and cites the exact factor ID.</p>
+            
+            <div class="registry-chips">
+                <span class="chip">v2025.12.17</span>
+                <span class="arrow">→</span>
+                <span class="chip">v2026.01.15</span>
+            </div>
+            
+            <div class="contribution-bars">
+                <div class="contribution-row">
+                    <span class="label">Factor update</span>
+                    <div class="bar-container">
+                        <div class="bar factor-bar" style="width: 78%"></div>
+                        <span class="percentage">78%</span>
+                    </div>
+                </div>
+                <div class="contribution-row">
+                    <span class="label">Activity change</span>
+                    <div class="bar-container">
+                        <div class="bar activity-bar" style="width: 22%"></div>
+                        <span class="percentage">22%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="callout">
+                <p>Example citation: <code>eGRID2024-CAMX-elec-combined-cycle: 0.385 → 0.412 kgCO2e/kWh</code></p>
+                <p class="note">All factor IDs and versions are included in exports for full audit traceability.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dive 3: Schema & validations -->
+    <section class="deep-dive" id="schema-validation">
+        <div class="container">
+            <h2>Schema &amp; validations</h2>
+            <p class="section-intro">Carbon Diff checks that both files have compatible schemas. If not, it displays an alert and lets you open the Mapper to align columns or rename fields.</p>
+            
+            <div class="alert-box">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <span>Schemas mismatch; open Mapper to align.</span>
+            </div>
+            
+            <div class="mapper-ui-mock">
+                <h4>Column Mapper</h4>
+                <div class="mapping-row">
+                    <span class="source">File A: facility_name</span>
+                    <span class="arrow">→</span>
+                    <span class="target">File B: facility</span>
+                </div>
+                <div class="mapping-row">
+                    <span class="source">File A: ghg_emissions</span>
+                    <span class="arrow">→</span>
+                    <span class="target">File B: emissions_kgco2e</span>
+                </div>
+            </div>
+            
+            <div class="validation-list">
+                <h4>Required validations:</h4>
+                <ul>
+                    <li>
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Columns: facility, scope, category, activity, factor_id, emissions_kgco2e
+                    </li>
+                    <li>
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Numeric emissions values
+                    </li>
+                    <li>
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Valid scope values (1, 2, 3)
+                    </li>
+                    <li>
+                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        Optional: registry_version for attribution
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dive 4: Export -->
+    <section class="deep-dive" id="export">
+        <div class="container">
+            <h2>Export: PDF/CSV and change‑log</h2>
+            <p class="section-intro">Export a branded PDF report, a CSV with row deltas, or copy a markdown change-log ready to paste into Slack or email. All formats include deterministic run ID and citations.</p>
+            
+            <div class="export-previews">
+                <div class="export-preview">
+                    <div class="pdf-preview-full">
+                        <div class="pdf-header">Carbon Diff Report</div>
+                        <div class="pdf-content">
+                            <p><strong>Total delta:</strong> −58,233 kgCO₂e</p>
+                            <p><strong>Factor update contribution:</strong> 78%</p>
+                            <p><strong>Activity change contribution:</strong> 22%</p>
+                            <p><strong>Run ID:</strong> cdiff-7F2A...</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-sm">Export PDF</button>
+                </div>
+                
+                <div class="export-preview">
+                    <div class="csv-preview">
+                        <code>row_id,facility,category,baseline,current,delta,reason
+127,HQ-East,Electricity,45230,57680,+12450,Factor update
+89,Plant-B,Natural Gas,32100,23770,-8330,Activity change</code>
+                    </div>
+                    <button class="btn btn-primary btn-sm">Export CSV</button>
+                </div>
+            </div>
+            
+            <div class="changelog-panel">
+                <h4>Paste-ready change-log</h4>
+                <div class="changelog-content">
+                    <pre># Carbon Diff Change-Log
+
+**Total delta:** −58,233 kgCO₂e (−15.2%)
+**Run ID:** cdiff-7F2A9B4E
+
+## Attribution
+- Factor set update: 78% (v2025.12.17 → v2026.01.15)
+- Activity change: 22%
+
+## Top Changes
+- Row #127 (HQ-East, Electricity): +12,450 kgCO₂e (Factor update)
+- Row #89 (Plant-B, Natural Gas): −8,330 kgCO₂e (Activity change)</pre>
+                </div>
+                <button class="btn btn-secondary btn-sm" id="copy-changelog-btn">Copy Change-Log</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deep Dive 5: Privacy, compliance, citations -->
+    <section class="deep-dive" id="security">
+        <div class="container">
+            <h2>Privacy, compliance, citations</h2>
+            <p class="section-intro">Client‑only. No uploads. Your data never leaves your device. Carbon Diff runs entirely in your browser via a Web Worker. Works offline. No third-party analytics or trackers.</p>
+            
+            <div class="security-visuals">
+                <div class="security-item">
+                    <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    <h4>Client-only</h4>
+                    <p>All compute happens on your device</p>
+                </div>
+                
+                <div class="security-item">
+                    <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 2v20M2 12h20"></path>
+                    </svg>
+                    <h4>No uploads</h4>
+                    <p>Files never touch a server</p>
+                </div>
+                
+                <div class="security-item">
+                    <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                    </svg>
+                    <h4>Works offline</h4>
+                    <p>No internet required after first load</p>
+                </div>
+            </div>
+            
+            <div class="compliance-chips">
+                <span class="chip">WCAG AA compliant</span>
+                <span class="chip">GHG Protocol baseline</span>
+                <span class="chip">No third-party trackers</span>
+            </div>
+            
+            <p class="legal-note"><strong>Legal:</strong> Carbon Diff is provided as-is. While we strive for accuracy, users are responsible for validating outputs for their specific compliance needs.</p>
+        </div>
+    </section>
+
+    <!-- Deep Dive 6: Performance and reliability -->
+    <section class="deep-dive" id="performance">
+        <div class="container">
+            <h2>Performance and reliability</h2>
+            <p class="section-intro">Built on a streaming parser and Web Worker architecture. Large files (10k+ rows) parse and diff in seconds. Every run produces a deterministic run ID for audit trails.</p>
+            
+            <div class="performance-info">
+                <div class="info-block">
+                    <h4>Streaming parser + worker</h4>
+                    <p>CSV files are parsed incrementally in a Web Worker, keeping the UI responsive even with large datasets.</p>
+                </div>
+                
+                <div class="performance-meter">
+                    <h4>Performance</h4>
+                    <div class="meter-bar">
+                        <span class="metric">10k rows: <strong>7.1s median</strong></span>
+                    </div>
+                    <div class="meter-bar">
+                        <span class="metric">50k rows: <strong>~35s</strong></span>
+                    </div>
+                </div>
+                
+                <div class="info-block">
+                    <div class="run-id-chip">
+                        <span class="label">Deterministic run ID:</span>
+                        <code>cdiff-7F2A9B4E</code>
+                    </div>
+                    <p>Same inputs + options = same output, every time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UI Walkthrough -->
+    <section class="ui-walkthrough" id="ui">
+        <div class="container">
+            <h2>UI walkthrough</h2>
+            <p class="section-intro">Mirror the in-app experience with these controls and system messages.</p>
+            
+            <div class="ui-elements">
+                <h3>Buttons &amp; Labels</h3>
+                <div class="button-grid">
+                    <button class="btn btn-primary">Upload A</button>
+                    <button class="btn btn-primary">Upload B</button>
+                    <button class="btn btn-primary">Compute Diff</button>
+                    <button class="btn btn-secondary">Export PDF</button>
+                    <button class="btn btn-secondary">Export CSV</button>
+                    <button class="btn btn-secondary">Copy Change‑Log</button>
+                    <button class="btn btn-tertiary">Open Mapper</button>
+                    <button class="btn btn-tertiary">Reset Compare</button>
+                </div>
+                
+                <h3>System Messages</h3>
+                <div class="system-messages">
+                    <div class="message-box warning">
+                        Schemas mismatch; open Mapper to align.
+                    </div>
+                    <div class="message-box info">
+                        95% of change driven by factor set update (registry v2025.12.17→v2026.01.15).
+                    </div>
+                    <div class="message-box warning">
+                        No registry_version in file B; factor attribution limited.
+                    </div>
+                    <div class="message-box info">
+                        Tolerance applied: deltas under 0.5% hidden.
+                    </div>
+                </div>
+                
+                <h3>Options Panel</h3>
+                <div class="options-panel">
+                    <div class="option-group">
+                        <label for="tolerance-slider">Tolerance</label>
+                        <input type="range" id="tolerance-slider" min="0" max="5" step="0.1" value="0.5">
+                        <span class="value-display">0.5%</span>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="groupings">Groupings</label>
+                        <select id="groupings" multiple>
+                            <option value="scope">Scope</option>
+                            <option value="category">Category</option>
+                            <option value="facility">Facility</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label for="match-strategy">Row match strategy</label>
+                        <select id="match-strategy">
+                            <option value="checksum">Checksum</option>
+                            <option value="key-fields">Key fields</option>
+                        </select>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="include-unmatched">
+                            Include unmatched rows
+                        </label>
+                    </div>
+                    
+                    <div class="option-group">
+                        <label>
+                            <input type="checkbox" id="show-factor-bars">
+                            Show factor contribution bars
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ui-states">
+                <h3>Drop Zone Hint</h3>
+                <div class="drop-zone-demo">
+                    <p>Drag a CSV or click to select</p>
+                </div>
+                
+                <h3>Validation Hint</h3>
+                <div class="validation-hint">
+                    Expected columns: facility, scope, category, activity, factor_id, emissions_kgco2e, registry_version
+                </div>
+                
+                <h3>Compute Toast</h3>
+                <div class="toast-demo">
+                    Diff ready in 6.9s. Deterministic run ID: cdiff‑7F2A…
+                </div>
+                
+                <h3>Empty State</h3>
+                <div class="empty-state">
+                    Upload A and B to begin. Or use sample files.
+                </div>
+                
+                <h3>Export Confirmation</h3>
+                <div class="toast-demo success">
+                    PDF and CSV exported. Citations included.
+                </div>
+            </div>
+            
+            <div class="sticky-summary-demo">
+                <h3>Sticky Summary Bar (after compute)</h3>
+                <div class="sticky-summary">
+                    Total delta: −58,233 kgCO₂e | 78% factor update | 22% activity change
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explanations Library -->
+    <section id="explanations" class="explanations-library">
+        <div class="container">
+            <h2>Explanations Library</h2>
+            <p class="section-intro">A local, signed JSON file containing explanations for common delta patterns. Use these to annotate your exports or customize locally.</p>
+            
+            <div class="explanations-controls">
+                <input type="text" placeholder="Search explanations..." class="search-input">
+                <button class="btn btn-secondary btn-sm">Pin to Export</button>
+                <button class="btn btn-tertiary btn-sm">Edit locally (if allowed)</button>
+                <button class="btn btn-tertiary btn-sm">Revert to signed default</button>
+            </div>
+            
+            <div class="explanations-list">
+                <div class="explanation-card">
+                    <h4>Factor set update</h4>
+                    <p><strong>Pattern:</strong> Large delta when registry_version changes but activity remains constant.</p>
+                    <p><strong>Explanation:</strong> The EPA updates emission factors periodically to reflect new grid mix data, fuel composition changes, or methodology refinements. When your baseline uses v2023 and current uses v2024, deltas can be significant even if actual electricity consumption is unchanged.</p>
+                    <p><strong>Action:</strong> Cite the factor ID and versions in your report. Verify the new factor is appropriate for your facility's grid region.</p>
+                </div>
+                
+                <div class="explanation-card">
+                    <h4>Activity increase</h4>
+                    <p><strong>Pattern:</strong> Delta proportional to change in activity column; factor_id and registry_version unchanged.</p>
+                    <p><strong>Explanation:</strong> Your facility consumed more of the input (e.g., more kWh of electricity, more gallons of fuel). The emission factor stayed the same, so the delta is purely driven by increased activity.</p>
+                    <p><strong>Action:</strong> Review operational changes: did production increase, did you add equipment, or was there a data entry error?</p>
+                </div>
+                
+                <div class="explanation-card">
+                    <h4>Schema mismatch</h4>
+                    <p><strong>Pattern:</strong> Files have different column names or missing required fields.</p>
+                    <p><strong>Explanation:</strong> Carbon Diff expects consistent schemas. If one file uses "facility_name" and another uses "facility", or if "registry_version" is missing, the tool cannot automatically align rows or attribute deltas to factors.</p>
+                    <p><strong>Action:</strong> Open the Mapper to align columns or add missing fields before computing the diff.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Example Scenario -->
+    <section class="example-scenario">
+        <div class="container">
+            <h2>Example scenario</h2>
+            <h3>From eGRID 2023 to eGRID 2024: explain the delta</h3>
+            
+            <div class="scenario-steps">
+                <ol>
+                    <li>Upload <code>baseline_egrid2023.csv</code> (contains registry_version: v2023.09.15) as File A.</li>
+                    <li>Upload <code>current_egrid2024.csv</code> (contains registry_version: v2024.01.20) as File B.</li>
+                    <li>Click <strong>Compute Diff</strong>.</li>
+                    <li>Carbon Diff matches rows by key fields (facility + scope + category).</li>
+                    <li>For each row, it calculates the delta and checks if the factor_id changed or if the activity changed.</li>
+                    <li>Result: "95% of change driven by factor set update (registry v2023.09.15 → v2024.01.20)."</li>
+                </ol>
+            </div>
+            
+            <div class="changelog-snippet">
+                <h4>Change-log snippet:</h4>
+                <pre># Carbon Diff Change-Log
+
+**Total delta:** +125,450 kgCO₂e (+8.3%)
+**Run ID:** cdiff-9E3B7A12
+
+## Attribution
+- Factor set update: 95% (v2023.09.15 → v2024.01.20)
+- Activity change: 5%
+
+## Top Changes
+- Row #34 (HQ-West, Electricity): +48,200 kgCO₂e (Factor: eGRID2024-CAMX increased)
+- Row #67 (Plant-A, Natural Gas): +12,100 kgCO₂e (Activity increased 15%)
+- Row #102 (Warehouse-D, Transport): −2,300 kgCO₂e (Activity decreased 8%)</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Compatibility and Expected Schema -->
+    <section id="docs" class="compatibility">
+        <div class="container">
+            <h2>Compatibility and expected schema</h2>
+            
+            <div class="schema-info">
+                <h3>Required columns</h3>
+                <ul class="column-list">
+                    <li><code>facility</code> — Facility name or ID</li>
+                    <li><code>scope</code> — 1, 2, or 3</li>
+                    <li><code>category</code> — e.g., Electricity, Natural Gas, Transport</li>
+                    <li><code>activity</code> — Numeric value (e.g., kWh, gallons)</li>
+                    <li><code>factor_id</code> — Emission factor identifier (e.g., eGRID2024-CAMX-elec)</li>
+                    <li><code>emissions_kgco2e</code> — Calculated emissions in kgCO₂e</li>
+                </ul>
+                
+                <h3>Optional columns</h3>
+                <ul class="column-list">
+                    <li><code>registry_version</code> — e.g., v2024.01.20 (enables factor attribution)</li>
+                    <li><code>row_id</code> — Custom row identifier (if absent, checksum is used)</li>
+                </ul>
+                
+                <h3>Error states</h3>
+                <div class="error-states">
+                    <div class="error-message">
+                        <strong>Missing required column:</strong> "File A is missing 'emissions_kgco2e'. Cannot compute diff."
+                    </div>
+                    <div class="error-message">
+                        <strong>Non-numeric emissions:</strong> "Row 45: emissions_kgco2e is not a number. Fix or exclude this row."
+                    </div>
+                    <div class="error-message">
+                        <strong>Invalid scope:</strong> "Row 12: scope must be 1, 2, or 3. Found 'Scope 2' (string)."
+                    </div>
+                </div>
+            </div>
+            
+            <div class="compatibility-notes">
+                <h3>Notes</h3>
+                <p>Carbon Diff is flexible with column order and case. If you use "Facility" instead of "facility", it will normalize automatically. If schemas differ significantly, use the Mapper to align before computing.</p>
+                <p>For best results, include <code>registry_version</code> in both files. This enables Carbon Diff to attribute deltas to factor updates vs. activity changes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Carbon Diff -->
+    <section class="why-carbon-diff">
+        <div class="container">
+            <h2>Why Carbon Diff</h2>
+            <ul class="differentiators">
+                <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <strong>Deterministic:</strong> Same inputs, same options, same output—every time. Ideal for audit trails.
+                </li>
+                <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <strong>Client-only:</strong> No uploads. No servers. Your data stays on your device.
+                </li>
+                <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <strong>Factor-aware:</strong> Cites eGRID/EPA Hub versions and factor IDs, explaining why deltas occurred.
+                </li>
+                <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <strong>Fast:</strong> 10k rows in under 8 seconds. Streaming parser keeps the UI responsive.
+                </li>
+                <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <strong>Export-ready:</strong> Branded PDF, CSV, and markdown change-logs with citations included.
+                </li>
+                <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <strong>Schema-flexible:</strong> Mapper handles mismatched columns and missing fields.
+                </li>
+                <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <strong>Accessible:</strong> WCAG AA compliant, keyboard navigable, high-contrast design.
+                </li>
+                <li>
+                    <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <strong>Offline-ready:</strong> Service Worker caches core assets. Works without internet after first load.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- CTA Band (mid-page) -->
+    <section class="cta-band">
+        <div class="container">
+            <h2>Get a deterministic diff in minutes</h2>
+            <div class="cta-buttons">
+                <button class="btn btn-primary btn-large">Try it free now</button>
+                <button class="btn btn-secondary btn-large">Download sample inventories</button>
+                <button class="btn btn-tertiary btn-large">See a 90‑second walkthrough</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ (Accordion) -->
+    <section id="resources" class="faq">
+        <div class="container">
+            <h2>FAQ</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What file format does Carbon Diff accept?</span>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p>CSV only. Both files must be UTF-8 encoded. We recommend including a header row with column names.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Does Carbon Diff upload my files to a server?</span>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p>No. All processing happens in your browser via a Web Worker. Your files never leave your device.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What if my files have different column names?</span>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Carbon Diff will alert you to schema mismatches and let you open the Mapper to align columns before computing the diff.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Can I use Carbon Diff offline?</span>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Yes. After your first visit, a Service Worker caches core assets. You can use Carbon Diff without an internet connection.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>How does factor attribution work?</span>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p>If both files include a <code>registry_version</code> column (e.g., v2023.09.15 and v2024.01.20), Carbon Diff compares factor IDs and versions. When the factor changes but activity stays constant, it attributes the delta to a "Factor set update." When activity changes and the factor stays the same, it attributes to "Activity change."</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What is a deterministic run ID?</span>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Every Carbon Diff computation produces a run ID (e.g., cdiff-7F2A9B4E) derived from your input files and options. Re-run with the same files and settings, and you'll get the same run ID and output—guaranteed. This is critical for audit trails.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Can I export results for compliance reporting?</span>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Yes. Export a branded PDF report, a CSV with row-level deltas, or copy a markdown change-log. All exports include the deterministic run ID, factor citations, and delta attributions.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>What browsers are supported?</span>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Carbon Diff works in all modern browsers that support Web Workers and File API: Chrome, Firefox, Safari, Edge (latest versions).</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Is there a file size limit?</span>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p>No hard limit, but performance degrades with very large files (>100k rows). For files over 50k rows, expect longer processing times. We recommend breaking large inventories into smaller batches.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Can I customize the Explanations Library?</span>
+                        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Yes, if you're running Carbon Diff locally. Edit <code>explanations.signed.json</code> to add custom explanations. The default explanations are signed; reverting restores the original set.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing Proof Section -->
+    <section class="closing-proof">
+        <div class="container">
+            <div class="micro-stats">
+                <div class="stat">
+                    <span class="stat-number">10k</span>
+                    <span class="stat-label">rows in under 8s</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">client-side</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">Deterministic</span>
+                    <span class="stat-label">every run</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">WCAG AA</span>
+                    <span class="stat-label">compliant</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#product">How it works</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#ui">UI walkthrough</a></li>
+                        <li><a href="#docs">Documentation</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#explanations">Explanations Library</a></li>
+                        <li><a href="/samples/sample_A.csv">Sample CSV A</a></li>
+                        <li><a href="/samples/sample_B.csv">Sample CSV B</a></li>
+                        <li><a href="#resources">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Security</h4>
+                    <ul>
+                        <li><a href="#security">Privacy &amp; compliance</a></li>
+                        <li><a href="#security">Client-only compute</a></li>
+                        <li><a href="#security">No data uploads</a></li>
+                        <li><a href="#security">Offline capability</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="https://github.com/chaos-factory/ideator-execution-009-carbon-accounting-5-carbon-diff">GitHub</a></li>
+                        <li><a href="https://github.com/chaos-factory/ideator-execution-009-carbon-accounting-5-carbon-diff/issues">Report an issue</a></li>
+                        <li><a href="#">License</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Carbon Diff. Provided as-is. Users are responsible for validating outputs for their compliance needs.</p>
+                <p class="footer-note">GHG Protocol baseline | eGRID/EPA Hub aware | Deterministic checksums</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

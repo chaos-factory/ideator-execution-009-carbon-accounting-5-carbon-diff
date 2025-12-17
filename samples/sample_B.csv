@@ -1,0 +1,12 @@
+facility,scope,category,activity,factor_id,emissions_kgco2e,registry_version
+HQ-East,2,Electricity,125000,eGRID2024-CAMX-elec-combined-cycle,51500,v2026.01.15
+Plant-B,1,Natural Gas,73000,EPA-NG-commercial-2024,27594,v2026.01.15
+Warehouse-C,3,Transport,49000,EPA-Transport-diesel-2024,6420,v2026.01.15
+Facility-D,2,Electricity,98000,eGRID2024-WECC-elec-coal,40180,v2026.01.15
+HQ-West,2,Electricity,156000,eGRID2024-CAMX-elec-combined-cycle,64260,v2026.01.15
+Plant-A,1,Natural Gas,83000,EPA-NG-commercial-2024,31374,v2026.01.15
+Warehouse-D,3,Transport,24000,EPA-Transport-diesel-2024,3144,v2026.01.15
+Office-E,2,Electricity,45000,eGRID2024-CAMX-elec-combined-cycle,18540,v2026.01.15
+Plant-C,1,Natural Gas,95000,EPA-NG-commercial-2024,35910,v2026.01.15
+Facility-F,2,Electricity,110000,eGRID2024-WECC-elec-coal,45100,v2026.01.15
+Facility-G,2,Electricity,50000,eGRID2024-CAMX-elec-combined-cycle,20600,v2026.01.15

@@ -1,0 +1,128 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Trigger on push to main branch
+  push:
+    branches:
+      - main
+  # Trigger on pull request for preview deployments
+  pull_request:
+    types: [opened, synchronize, reopened]
+  # Allow manual trigger
+  workflow_dispatch:
+
+# Set permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  pull-requests: write
+
+# Allow only one concurrent deployment per branch/PR
+concurrency:
+  group: "pages-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          path: '.'
+
+  # Deploy to GitHub Pages (main branch only)
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # PR Preview deployment
+  preview:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Comment PR with preview info
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const headRef = context.payload.pull_request.head.ref;
+            const repoOwner = context.repo.owner;
+            const repoName = context.repo.repo;
+            
+            // Note: For actual PR previews, you would need a service like Netlify, Vercel, or Cloudflare Pages
+            // GitHub Pages only supports one deployment at a time (from main branch)
+            // This is a placeholder comment for the PR preview workflow
+            
+            const comment = `## 🔍 PR Preview
+            
+            **Status:** Ready for review
+            **Branch:** \`${headRef}\`
+            
+            ### Preview Information
+            This PR modifies the Carbon Diff landing page. The changes are ready to be reviewed.
+            
+            **Note:** To view a live preview, this PR needs to be merged to main, or you can:
+            1. Clone this PR branch locally
+            2. Open \`index.html\` in your browser
+            3. Or use \`python -m http.server 8000\` and visit \`http://localhost:8000\`
+            
+            ### Files Changed
+            - Static HTML, CSS, and JavaScript files
+            - No build step required
+            
+            Once merged to main, the site will be live at:
+            🌐 https://${repoOwner}.github.io/${repoName}/
+            `;
+            
+            // Find existing preview comments
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: repoOwner,
+              repo: repoName,
+              issue_number: prNumber
+            });
+            
+            const existingComment = comments.find(comment => 
+              comment.user.type === 'Bot' && 
+              comment.body.includes('PR Preview')
+            );
+            
+            if (existingComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: repoOwner,
+                repo: repoName,
+                comment_id: existingComment.id,
+                body: comment
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: repoOwner,
+                repo: repoName,
+                issue_number: prNumber,
+                body: comment
+              });
+            }
