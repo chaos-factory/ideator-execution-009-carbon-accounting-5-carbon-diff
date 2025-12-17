@@ -1,0 +1,37 @@
+{
+  "version": "1.0.0",
+  "signature": "sha256:a1b2c3d4e5f6...",
+  "generated": "2024-12-17T00:00:00Z",
+  "explanations": [
+    {
+      "id": "factor-set-update",
+      "title": "Factor set update",
+      "pattern": "Large delta when registry_version changes but activity remains constant.",
+      "explanation": "The EPA updates emission factors periodically to reflect new grid mix data, fuel composition changes, or methodology refinements. When your baseline uses v2023 and current uses v2024, deltas can be significant even if actual electricity consumption is unchanged.",
+      "action": "Cite the factor ID and versions in your report. Verify the new factor is appropriate for your facility's grid region.",
+      "tags": ["factor", "registry", "version", "update"]
+    },
+    {
+      "id": "activity-increase",
+      "title": "Activity increase",
+      "pattern": "Delta proportional to change in activity column; factor_id and registry_version unchanged.",
+      "explanation": "Your facility consumed more of the input (e.g., more kWh of electricity, more gallons of fuel). The emission factor stayed the same, so the delta is purely driven by increased activity.",
+      "action": "Review operational changes: did production increase, did you add equipment, or was there a data entry error?",
+      "tags": ["activity", "increase", "operational"]
+    },
+    {
+      "id": "schema-mismatch",
+      "title": "Schema mismatch",
+      "pattern": "Files have different column names or missing required fields.",
+      "explanation": "Carbon Diff expects consistent schemas. If one file uses \"facility_name\" and another uses \"facility\", or if \"registry_version\" is missing, the tool cannot automatically align rows or attribute deltas to factors.",
+      "action": "Open the Mapper to align columns or add missing fields before computing the diff.",
+      "tags": ["schema", "validation", "mapping"]
+    }
+  ],
+  "metadata": {
+    "source": "Carbon Diff Explanations Library",
+    "license": "CC-BY-4.0",
+    "contributors": ["Carbon Diff Team"],
+    "last_updated": "2024-12-17"
+  }
+}
