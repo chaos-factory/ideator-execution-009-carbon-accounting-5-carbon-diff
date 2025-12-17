@@ -1,0 +1,1 @@
+Client-side tool to compare two GHG inventory CSVs and explain deltas. Deterministic row/category/total diffs; factor/version attribution (eGRID/EPA); schema mapping; streaming parser; tolerance/groupings; export PDF/CSV; offline via Web Worker + GitHub Pages. Target: 10k rows in <8s.
